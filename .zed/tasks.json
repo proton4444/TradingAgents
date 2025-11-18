@@ -1,23 +1,107 @@
 [
   {
-    "label": "Run TradingAgents CLI",
+    "label": "🚀 Run TradingAgents CLI",
     "command": "python",
     "args": ["-m", "cli.main"],
     "use_new_terminal": false,
     "reveal": "always"
   },
   {
-    "label": "Test OpenRouter Connection",
+    "label": "🧪 Test OpenRouter Connection",
     "command": "python",
     "args": ["openrouter_demo.py"],
     "use_new_terminal": false,
     "reveal": "always"
   },
   {
-    "label": "Run TradingAgents CLI (New Terminal)",
+    "label": "📊 Quick Test - NVDA",
+    "command": "python",
+    "args": ["openrouter_demo.py", "--ticker", "NVDA", "--date", "2024-05-10"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "📊 Quick Test - AAPL",
+    "command": "python",
+    "args": ["openrouter_demo.py", "--ticker", "AAPL", "--date", "2024-05-10"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "📊 Quick Test - TSLA",
+    "command": "python",
+    "args": ["openrouter_demo.py", "--ticker", "TSLA", "--date", "2024-05-10"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "🔧 Install/Update Dependencies",
+    "command": "pip",
+    "args": ["install", "-r", "requirements.txt", "--upgrade"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "📦 Show Installed Packages",
+    "command": "pip",
+    "args": ["list"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "🔍 Check Python Version",
+    "command": "python",
+    "args": ["--version"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "🔍 Verify Environment",
+    "command": "python",
+    "args": ["-c", "import sys; print(f'Python: {sys.version}'); print(f'Executable: {sys.executable}')"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "📝 Run TradingAgents CLI (New Terminal)",
     "command": "python",
     "args": ["-m", "cli.main"],
     "use_new_terminal": true,
+    "reveal": "always"
+  },
+  {
+    "label": "🧹 Clean Cache Files",
+    "command": "python",
+    "args": ["-c", "import shutil, os; [shutil.rmtree(p) for p in ['__pycache__', '.pytest_cache', '.mypy_cache'] if os.path.exists(p)]; print('Cache cleaned!')"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "📂 Show Project Structure",
+    "command": "python",
+    "args": ["-c", "import os; [print(f'{root}/{name}') for root, dirs, files in os.walk('.') if '.venv' not in root and '.git' not in root for name in files[:5]]"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "🔑 Check API Keys Status",
+    "command": "python",
+    "args": ["-c", "from dotenv import load_dotenv; import os; load_dotenv(); ok='OPENAI_API_KEY' in os.environ and 'ALPHA_VANTAGE_API_KEY' in os.environ; print(f'✅ API keys configured' if ok else '❌ API keys missing')"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "🌐 Test Internet Connection",
+    "command": "python",
+    "args": ["-c", "import urllib.request; urllib.request.urlopen('https://openrouter.ai', timeout=5); print('✅ Internet connected')"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "📖 Show Demo Help",
+    "command": "python",
+    "args": ["openrouter_demo.py", "--help"],
+    "use_new_terminal": false,
     "reveal": "always"
   }
 ]
