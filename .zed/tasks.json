@@ -1,0 +1,23 @@
+[
+  {
+    "label": "Run TradingAgents CLI",
+    "command": "python",
+    "args": ["-m", "cli.main"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Test OpenRouter Connection",
+    "command": "python",
+    "args": ["openrouter_demo.py"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Run TradingAgents CLI (New Terminal)",
+    "command": "python",
+    "args": ["-m", "cli.main"],
+    "use_new_terminal": true,
+    "reveal": "always"
+  }
+]
