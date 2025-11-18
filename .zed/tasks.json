@@ -1,5 +1,12 @@
 [
   {
+    "label": "✅ Check Setup (Validate Everything)",
+    "command": "python",
+    "args": ["scripts/check_setup.py"],
+    "use_new_terminal": false,
+    "reveal": "always"
+  },
+  {
     "label": "🚀 Run TradingAgents CLI",
     "command": "python",
     "args": ["-m", "cli.main"],
