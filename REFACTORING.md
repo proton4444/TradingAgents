@@ -46,7 +46,7 @@ QUICK_THINK_MODEL=openai/gpt-4o-mini
 CORE_STOCK_VENDOR=yfinance
 TECHNICAL_INDICATORS_VENDOR=yfinance
 FUNDAMENTAL_DATA_VENDOR=alpha_vantage
-NEWS_DATA_VENDOR=alpha_vantage
+NEWS_DATA_VENDOR=openai
 
 # Analysis Parameters
 MAX_DEBATE_ROUNDS=1
