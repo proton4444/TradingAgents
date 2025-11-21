@@ -68,10 +68,10 @@ DEFAULT_CONFIG = {
     "data_cache_dir": _get_cache_dir(),
 
     # LLM settings - can be overridden by environment variables
-    "llm_provider": os.getenv("LLM_PROVIDER", "openai"),
-    "deep_think_llm": os.getenv("DEEP_THINK_MODEL", "gpt-4o-mini"),
-    "quick_think_llm": os.getenv("QUICK_THINK_MODEL", "gpt-4o-mini"),
-    "backend_url": os.getenv("BACKEND_URL", "https://api.openai.com/v1"),
+    "llm_provider": os.getenv("LLM_PROVIDER", "openrouter"),
+    "deep_think_llm": os.getenv("DEEP_THINK_MODEL", "openai/gpt-4o-mini"),
+    "quick_think_llm": os.getenv("QUICK_THINK_MODEL", "openai/gpt-4o-mini"),
+    "backend_url": os.getenv("BACKEND_URL", "https://openrouter.ai/api/v1"),
 
     # Debate and discussion settings
     "max_debate_rounds": int(os.getenv("MAX_DEBATE_ROUNDS", "1")),
