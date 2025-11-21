@@ -43,7 +43,7 @@
 
 <div align="center">
 
-🚀 [TradingAgents](#tradingagents-framework) | ⚡ [Installation & CLI](#installation-and-cli) | 🎬 [Demo](https://www.youtube.com/watch?v=90gr5lwjIho) | 📦 [Package Usage](#tradingagents-package) | 🤝 [Contributing](#contributing) | 📄 [Citation](#citation)
+🚀 [TradingAgents](#tradingagents-framework) | ⚡ [Installation & CLI](#installation-and-cli) | 🖥️ [Web UI](#web-ui-streamlit) | 🎬 [Demo](https://www.youtube.com/watch?v=90gr5lwjIho) | 📦 [Package Usage](#tradingagents-package) | 🤝 [Contributing](#contributing) | 📄 [Citation](#citation)
 
 </div>
 
@@ -150,6 +150,24 @@ An interface will appear showing results as they load, letting you track the age
 <p align="center">
   <img src="assets/cli/cli_transaction.png" width="100%" style="display: inline-block; margin: 0 2%;">
 </p>
+
+### Web UI (Streamlit)
+
+For a more visual and interactive experience, you can use the Streamlit web interface:
+
+```bash
+streamlit run app.py
+```
+
+The web UI will open in your browser at `http://localhost:8501` and provides:
+
+- 📊 **Interactive Analysis**: Select stocks, dates, and AI models through a visual interface
+- 📈 **Charts & Visualizations**: View trading decisions with charts and detailed metrics
+- 🤖 **Model Selection**: Choose from multiple AI models (GPT-4, Claude, Gemini, etc.)
+- 💾 **Export Results**: Download analysis results as JSON
+- ⚡ **Real-time Progress**: Track analysis progress with visual indicators
+
+See [UI_GUIDE.md](UI_GUIDE.md) for detailed instructions and features.
 
 ## TradingAgents Package
 

@@ -1,5 +1,7 @@
 typing-extensions
 python-dotenv
+streamlit
+plotly
 langchain-openai
 langchain-experimental
 pandas
