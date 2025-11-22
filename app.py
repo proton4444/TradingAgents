@@ -152,7 +152,7 @@ def main():
 
         analysis_date = st.date_input(
             "Analysis Date",
-            value=datetime(2024, 5, 10),
+            value=datetime.now(),
             max_value=datetime.now(),
             help="Select the date for analysis"
         )
@@ -167,19 +167,21 @@ def main():
             "anthropic/claude-3-haiku",
             "google/gemini-pro",
             "meta-llama/llama-3.1-70b-instruct",
+            "x-ai/grok-code-fast-1",
+            "z-ai/glm-4.5-air:free",
         ]
 
         deep_model = st.selectbox(
             "Deep Think Model",
             options=available_models,
-            index=0,
+            index=7,
             help="Model for complex reasoning and analysis"
         )
 
         quick_model = st.selectbox(
             "Quick Think Model",
             options=available_models,
-            index=0,
+            index=7,
             help="Model for quick analysis tasks"
         )
 
@@ -251,13 +253,50 @@ def main():
         # Run analysis
         with st.spinner(f"🤖 Analyzing {ticker}... This may take 1-2 minutes..."):
             progress_text = st.empty()
-
-            progress_text.text("📊 Fetching stock data...")
+            
+            # Create a placeholder for logs
+            log_expander = st.expander("📝 Analysis Logs (Real-time)", expanded=True)
+            log_container = log_expander.empty()
+            
+            # Capture stdout/stderr
+            import io
+            from contextlib import redirect_stdout, redirect_stderr
+            
+            log_buffer = io.StringIO()
+            
+            class StreamlitSink:
+                def __init__(self, buffer, container):
+                    self.buffer = buffer
+                    self.container = container
+                    
+                def write(self, data):
+                    self.buffer.write(data)
+                    # Update the UI with the latest logs
+                    try:
+                        self.container.code(self.buffer.getvalue()[-2000:]) # Show last 2000 chars
+                    except Exception:
+                        # If we are in a background thread (NoSessionContext), we can't update the UI
+                        # We just skip the UI update but keep the data in the buffer
+                        pass
+                    
+                def flush(self):
+                    pass
 
             try:
-                final_state, decision = ta.propagate(ticker, date_str)
-
-                progress_text.text("✅ Analysis complete!")
+                # Redirect stdout/stderr to our sink
+                sink = StreamlitSink(log_buffer, log_container)
+                
+                # We need to wrap the execution to capture output
+                with redirect_stdout(sink), redirect_stderr(sink):
+                    progress_text.text("📊 Agents are working... Check logs below for details.")
+                    try:
+                        final_state, decision = ta.propagate(ticker, date_str)
+                        progress_text.text("✅ Analysis complete!")
+                    except Exception as e:
+                        # Print traceback to the captured log so it appears in the UI
+                        print(f"\nCRITICAL ERROR: {str(e)}")
+                        traceback.print_exc()
+                        raise e # Re-raise to be caught by the outer try/except for the UI error message
 
             except Exception as e:
                 st.error(f"❌ Error during analysis: {str(e)}")

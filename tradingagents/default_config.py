@@ -84,7 +84,7 @@ DEFAULT_CONFIG = {
         "core_stock_apis": os.getenv("CORE_STOCK_VENDOR", "yfinance"),
         "technical_indicators": os.getenv("TECHNICAL_INDICATORS_VENDOR", "yfinance"),
         "fundamental_data": os.getenv("FUNDAMENTAL_DATA_VENDOR", "alpha_vantage"),
-        "news_data": os.getenv("NEWS_DATA_VENDOR", "openai"),
+        "news_data": os.getenv("NEWS_DATA_VENDOR", "google"),
     },
 
     # Tool-level configuration (takes precedence over category-level)

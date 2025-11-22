@@ -28,3 +28,15 @@ def get_google_news(
         return ""
 
     return f"## {query} Google News, from {before} to {curr_date}:\n\n{news_str}"
+
+
+def get_global_news_google(
+    curr_date: Annotated[str, "Curr date in yyyy-mm-dd format"],
+    look_back_days: Annotated[int, "how many days to look back"] = 7,
+    limit: Annotated[int, "limit"] = 5,
+) -> str:
+    """Wrapper for get_google_news to serve as get_global_news implementation."""
+    # We ignore the limit for now as get_google_news doesn't support it directly, 
+    # or we could slice the results if we modified get_google_news.
+    # For now, just passing a generic query.
+    return get_google_news("financial markets macroeconomics", curr_date, look_back_days)

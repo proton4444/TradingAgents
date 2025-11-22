@@ -3,23 +3,24 @@ from chromadb.config import Settings
 from openai import OpenAI
 
 
+from chromadb.utils import embedding_functions
+
 class FinancialSituationMemory:
     def __init__(self, name, config):
-        if config["backend_url"] == "http://localhost:11434/v1":
-            self.embedding = "nomic-embed-text"
-        else:
-            self.embedding = "text-embedding-3-small"
-        self.client = OpenAI(base_url=config["backend_url"])
+        # Use ChromaDB's default embedding function (Sentence Transformers)
+        # This runs locally and doesn't require an API call, avoiding OpenRouter issues
+        self.embedding_fn = embedding_functions.DefaultEmbeddingFunction()
+        
         self.chroma_client = chromadb.Client(Settings(allow_reset=True))
-        self.situation_collection = self.chroma_client.create_collection(name=name)
+        self.situation_collection = self.chroma_client.get_or_create_collection(
+            name=name,
+            embedding_function=self.embedding_fn
+        )
 
     def get_embedding(self, text):
-        """Get OpenAI embedding for a text"""
-        
-        response = self.client.embeddings.create(
-            model=self.embedding, input=text
-        )
-        return response.data[0].embedding
+        """Get embedding for a text using the local function"""
+        # The embedding function returns a list of embeddings, we take the first one
+        return self.embedding_fn([text])[0]
 
     def add_situations(self, situations_and_advice):
         """Add financial situations and their corresponding advice. Parameter is a list of tuples (situation, rec)"""
